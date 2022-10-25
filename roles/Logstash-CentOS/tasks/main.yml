@@ -1,0 +1,22 @@
+#Penas_Logstash-CentOS
+#Installing Logstash
+- name: Install LogStash
+  yum:
+    name: logstash
+    state: latest
+    update_cache: yes
+
+- name: Run daemon-reload for LogStash
+  systemd: daemon_reload=yes
+
+- name: Enable service LogStash
+  systemd:
+    name: logstash
+    enabled: yes
+
+- name: Confirmation of LogStash is enabled
+  tags: serviceon
+  service:
+    name: logstash
+    state: restarted
+    enabled: true

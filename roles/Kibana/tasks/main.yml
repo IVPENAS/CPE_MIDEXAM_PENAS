@@ -1,0 +1,43 @@
+#Installation of Kibana
+- name: Installing Kibana
+  apt:
+    name: kibana
+    state: latest
+    update_cache: yes
+
+- name: Adding server.port in Kibana
+  lineinfile:
+    dest: /etc/kibana/kibana.yml
+    line: "server.port: 5601"
+    state: present
+
+- name: Adding server.host in Kibana
+  lineinfile:
+    dest: /etc/kibana/kibana.yml
+    line: 'server.host: “0.0.0.0”'
+    state: present
+
+- name: Adding server.name in Kibana
+  lineinfile:
+    dest: /etc/kibana/kibana.yml
+    line: 'server.name: “demo-kibana”'
+    state: present
+
+- name: Adding elasticsearch.hosts in Kibana
+  lineinfile:
+    dest: /etc/kibana/kibana.yml
+    line: 'elasticsearch.hosts: [“http://0.0.0.0:9200"]'
+    state: present
+
+- name: Run daemon-reload for Kibana
+  systemd: daemon_reload=yes
+
+- name: Confirmation of Kibana is enabled
+  tags: serviceon
+  service:
+    name: kibana
+    state: restarted
+    enabled: true
+
+- name: Start Kibana
+  shell: systemctl start kibana

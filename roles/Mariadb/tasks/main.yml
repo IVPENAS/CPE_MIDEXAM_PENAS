@@ -1,0 +1,14 @@
+#MariaDB-Ubuntu
+
+- name: Install mariad package
+  apt:
+    name: mariadb-server
+    state: latest
+  when: ansible_distribution == "Ubuntu"
+
+- name: "Mariadb - Restarting/Enabling"
+  service:
+    name: mariadb
+    state: restarted
+    enabled: true
+

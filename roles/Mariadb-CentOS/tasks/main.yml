@@ -1,0 +1,12 @@
+#Penas_Mariadb-CentOs
+
+- name: Install Mariadb Package
+  yum:
+    name: mariadb-server
+  when: ansible_distribution == "CentOS"
+
+- name: "Mariadb - Restart/Enabling"
+  service:
+    name: mariadb
+    state: restarted
+    enabled: true

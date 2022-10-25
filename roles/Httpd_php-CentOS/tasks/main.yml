@@ -1,0 +1,8 @@
+#Penas_Httpd_php-CentOS
+
+- name: start httpd
+  service:
+    name: httpd
+    state: started
+  when: ansible_distribution == "CentOS"
+
